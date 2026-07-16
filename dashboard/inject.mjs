@@ -130,7 +130,7 @@ function loadOpenSkyFallback(currentTimestamp) {
     const filePath = join(runsDir, file);
     try {
       const prior = JSON.parse(readFileSync(filePath, 'utf8'));
-      const priorTimestamp = prior.sources?.OpenSky?.timestamp || prior.crucix?.timestamp || null;
+      const priorTimestamp = prior.sources?.OpenSky?.timestamp || prior.devora?.timestamp || null;
       if (priorTimestamp && Number.isFinite(currentMs) && new Date(priorTimestamp).getTime() >= currentMs) continue;
 
       const hotspots = prior.sources?.OpenSky?.hotspots || [];
@@ -402,7 +402,7 @@ export async function synthesize(data) {
   const liveAirHotspots = data.sources.OpenSky?.hotspots || [];
   const airFallback = sumAirHotspots(liveAirHotspots) > 0
     ? null
-    : loadOpenSkyFallback(data.sources.OpenSky?.timestamp || data.crucix?.timestamp);
+    : loadOpenSkyFallback(data.sources.OpenSky?.timestamp || data.devora?.timestamp);
   const effectiveAirHotspots = airFallback?.hotspots || liveAirHotspots;
   const air = summarizeAirHotspots(effectiveAirHotspots);
   const thermal = (data.sources.FIRMS?.hotspots || []).map(h => ({
@@ -597,11 +597,11 @@ export async function synthesize(data) {
   const news = await fetchAllNews();
 
   const V2 = {
-    meta: data.crucix, air, thermal, tSignals, chokepoints, nuke, nukeSignals,
+    meta: data.devora, air, thermal, tSignals, chokepoints, nuke, nukeSignals,
     airMeta: {
       fallback: Boolean(airFallback),
       liveTotal: sumAirHotspots(liveAirHotspots),
-      timestamp: airFallback?.timestamp || data.sources.OpenSky?.timestamp || data.crucix?.timestamp || null,
+      timestamp: airFallback?.timestamp || data.sources.OpenSky?.timestamp || data.devora?.timestamp || null,
       source: airFallback ? 'OpenSky fallback' : 'OpenSky',
       ...(airFallback ? { fallbackFile: airFallback.file } : {}),
       ...(data.sources.OpenSky?.error ? { error: data.sources.OpenSky.error } : {}),
