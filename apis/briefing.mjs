@@ -66,58 +66,67 @@ export async function runSource(name, fn, ...args) {
   }
 }
 
+async function runBatches(tasks, batchSize = 4) {
+  const results = [];
+  for (let i = 0; i < tasks.length; i += batchSize) {
+    const batch = tasks.slice(i, i + batchSize);
+    console.error(`[Devora] Sweeping batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(tasks.length / batchSize)} (${batch.map(b => b.name).join(', ')})...`);
+    const batchPromises = batch.map(t => runSource(t.name, t.fn, ...(t.args || [])));
+    const batchResults = await Promise.all(batchPromises);
+    results.push(...batchResults);
+  }
+  return results;
+}
+
 export async function fullBriefing() {
-  console.error('[Devora] Starting intelligence sweep — 29 sources...');
+  console.error('[Devora] Starting intelligence sweep — 29 sources in parallel batches...');
   const start = Date.now();
 
-  const allPromises = [
+  const tasks = [
     // Tier 1: Core OSINT & Geopolitical
-    runSource('GDELT', gdelt),
-    runSource('OpenSky', opensky),
-    runSource('FIRMS', firms),
-    runSource('Maritime', ships),
-    runSource('Safecast', safecast),
-    runSource('ACLED', acled),
-    runSource('ReliefWeb', reliefweb),
-    runSource('WHO', who),
-    runSource('OFAC', ofac),
-    runSource('OpenSanctions', opensanctions),
-    runSource('ADS-B', adsb),
+    { name: 'GDELT', fn: gdelt },
+    { name: 'OpenSky', fn: opensky },
+    { name: 'FIRMS', fn: firms },
+    { name: 'Maritime', fn: ships },
+    { name: 'Safecast', fn: safecast },
+    { name: 'ACLED', fn: acled },
+    { name: 'ReliefWeb', fn: reliefweb },
+    { name: 'WHO', fn: who },
+    { name: 'OFAC', fn: ofac },
+    { name: 'OpenSanctions', fn: opensanctions },
+    { name: 'ADS-B', fn: adsb },
 
     // Tier 2: Economic & Financial
-    runSource('FRED', fred, process.env.FRED_API_KEY),
-    runSource('Treasury', treasury),
-    runSource('BLS', bls, process.env.BLS_API_KEY),
-    runSource('EIA', eia, process.env.EIA_API_KEY),
-    runSource('GSCPI', gscpi),
-    runSource('USAspending', usaspending),
-    runSource('Comtrade', comtrade),
+    { name: 'FRED', fn: fred, args: [process.env.FRED_API_KEY] },
+    { name: 'Treasury', fn: treasury },
+    { name: 'BLS', fn: bls, args: [process.env.BLS_API_KEY] },
+    { name: 'EIA', fn: eia, args: [process.env.EIA_API_KEY] },
+    { name: 'GSCPI', fn: gscpi },
+    { name: 'USAspending', fn: usaspending },
+    { name: 'Comtrade', fn: comtrade },
 
     // Tier 3: Weather, Environment, Technology, Social
-    runSource('NOAA', noaa),
-    runSource('EPA', epa),
-    runSource('Patents', patents),
-    runSource('Bluesky', bluesky),
-    runSource('Reddit', reddit),
-    runSource('Telegram', telegram),
-    runSource('KiwiSDR', kiwisdr),
+    { name: 'NOAA', fn: noaa },
+    { name: 'EPA', fn: epa },
+    { name: 'Patents', fn: patents },
+    { name: 'Bluesky', fn: bluesky },
+    { name: 'Reddit', fn: reddit },
+    { name: 'Telegram', fn: telegram },
+    { name: 'KiwiSDR', fn: kiwisdr },
 
     // Tier 4: Space & Satellites
-    runSource('Space', space),
+    { name: 'Space', fn: space },
 
     // Tier 5: Live Market Data
-    runSource('YFinance', yfinance),
+    { name: 'YFinance', fn: yfinance },
 
     // Tier 6: Cyber & Infrastructure
-    runSource('CISA-KEV', cisaKev),
-    runSource('Cloudflare-Radar', cloudflareRadar),
+    { name: 'CISA-KEV', fn: cisaKev },
+    { name: 'Cloudflare-Radar', fn: cloudflareRadar },
   ];
 
-  // Each runSource has its own 30s timeout, so allSettled will resolve
-  // within ~30s even if APIs hang. Global timeout is a safety net.
-  const results = await Promise.allSettled(allPromises);
-
-  const sources = results.map(r => r.status === 'fulfilled' ? r.value : { status: 'failed', error: r.reason?.message });
+  // Run in batches of 4 to stay well under Render's 512MB RAM limit
+  const sources = await runBatches(tasks, 4);
   const totalMs = Date.now() - start;
 
   const output = {
