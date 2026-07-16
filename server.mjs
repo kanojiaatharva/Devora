@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Crucix Intelligence Engine — Dev Server
+// Devora Intelligence Engine — Dev Server
 // Serves the Jarvis dashboard, runs sweep cycle, pushes live updates via SSE
 
 import express from 'express';
@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
-import config from './crucix.config.mjs';
+import config from './devora.config.mjs';
 import { getLocale, currentLanguage, getSupportedLocales } from './lib/i18n.mjs';
 import { fullBriefing } from './apis/briefing.mjs';
 import { synthesize, generateIdeas } from './dashboard/inject.mjs';
@@ -43,9 +43,9 @@ const llmProvider = createLLMProvider(config.llm);
 const telegramAlerter = new TelegramAlerter(config.telegram);
 const discordAlerter = new DiscordAlerter(config.discord || {});
 
-if (llmProvider) console.log(`[Crucix] LLM enabled: ${llmProvider.name} (${llmProvider.model})`);
+if (llmProvider) console.log(`[Devora] LLM enabled: ${llmProvider.name} (${llmProvider.model})`);
 if (telegramAlerter.isConfigured) {
-  console.log('[Crucix] Telegram alerts enabled');
+  console.log('[Devora] Telegram alerts enabled');
 
   // ─── Two-Way Bot Commands ───────────────────────────────────────────────
 
@@ -62,7 +62,7 @@ if (telegramAlerter.isConfigured) {
       : 'pending';
 
     return [
-      `🖥️ *CRUCIX STATUS*`,
+      `🖥️ *DEVORA STATUS*`,
       ``,
       `Uptime: ${h}h ${m}m`,
       `Last sweep: ${lastSweepTime ? new Date(lastSweepTime).toLocaleTimeString() + ' UTC' : 'never'}`,
@@ -78,7 +78,7 @@ if (telegramAlerter.isConfigured) {
   telegramAlerter.onCommand('/sweep', async () => {
     if (sweepInProgress) return '🔄 Sweep already in progress. Please wait.';
     // Fire and forget — don't block the bot response
-    runSweepCycle().catch(err => console.error('[Crucix] Manual sweep failed:', err.message));
+    runSweepCycle().catch(err => console.error('[Devora] Manual sweep failed:', err.message));
     return '🚀 Manual sweep triggered. You\'ll receive alerts if anything significant is detected.';
   });
 
@@ -92,7 +92,7 @@ if (telegramAlerter.isConfigured) {
     const ideas = (currentData.ideas || []).slice(0, 3);
 
     const sections = [
-      `📋 *CRUCIX BRIEF*`,
+      `📋 *DEVORA BRIEF*`,
       `_${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC_`,
       ``,
     ];
@@ -136,7 +136,7 @@ if (telegramAlerter.isConfigured) {
   });
 
   telegramAlerter.onCommand('/portfolio', async () => {
-    return '📊 Portfolio integration requires Alpaca MCP connection.\nUse the Crucix dashboard or Claude agent for portfolio queries.';
+    return '📊 Portfolio integration requires Alpaca MCP connection.\nUse the Devora dashboard or Claude agent for portfolio queries.';
   });
 
   // Start polling for bot commands
@@ -145,7 +145,7 @@ if (telegramAlerter.isConfigured) {
 
 // === Discord Bot ===
 if (discordAlerter.isConfigured) {
-  console.log('[Crucix] Discord bot enabled');
+  console.log('[Devora] Discord bot enabled');
 
   // Reuse the same command handlers as Telegram (DRY)
   discordAlerter.onCommand('status', async () => {
@@ -161,7 +161,7 @@ if (discordAlerter.isConfigured) {
       : 'pending';
 
     return [
-      `**🖥️ CRUCIX STATUS**\n`,
+      `**🖥️ DEVORA STATUS**\n`,
       `Uptime: ${h}h ${m}m`,
       `Last sweep: ${lastSweepTime ? new Date(lastSweepTime).toLocaleTimeString() + ' UTC' : 'never'}`,
       `Next sweep: ${nextSweep} UTC`,
@@ -175,7 +175,7 @@ if (discordAlerter.isConfigured) {
 
   discordAlerter.onCommand('sweep', async () => {
     if (sweepInProgress) return '🔄 Sweep already in progress. Please wait.';
-    runSweepCycle().catch(err => console.error('[Crucix] Manual sweep failed:', err.message));
+    runSweepCycle().catch(err => console.error('[Devora] Manual sweep failed:', err.message));
     return '🚀 Manual sweep triggered. You\'ll receive alerts if anything significant is detected.';
   });
 
@@ -188,7 +188,7 @@ if (discordAlerter.isConfigured) {
     const delta = memory.getLastDelta();
     const ideas = (currentData.ideas || []).slice(0, 3);
 
-    const sections = [`**📋 CRUCIX BRIEF**\n_${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC_\n`];
+    const sections = [`**📋 DEVORA BRIEF**\n_${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC_\n`];
 
     if (delta?.summary) {
       const dirEmoji = { 'risk-off': '📉', 'risk-on': '📈', 'mixed': '↔️' }[delta.summary.direction] || '↔️';
@@ -223,12 +223,12 @@ if (discordAlerter.isConfigured) {
   });
 
   discordAlerter.onCommand('portfolio', async () => {
-    return '📊 Portfolio integration requires Alpaca MCP connection.\nUse the Crucix dashboard or Claude agent for portfolio queries.';
+    return '📊 Portfolio integration requires Alpaca MCP connection.\nUse the Devora dashboard or Claude agent for portfolio queries.';
   });
 
   // Start the Discord bot (non-blocking — connection happens async)
   discordAlerter.start().catch(err => {
-    console.error('[Crucix] Discord bot startup failed (non-fatal):', err.message);
+    console.error('[Devora] Discord bot startup failed (non-fatal):', err.message);
   });
 }
 
@@ -246,7 +246,7 @@ app.get('/', (req, res) => {
     
     // Inject locale data into the HTML
     const locale = getLocale();
-    const localeScript = `<script>window.__CRUCIX_LOCALE__ = ${JSON.stringify(locale).replace(/<\/script>/gi, '<\\/script>')};</script>`;
+    const localeScript = `<script>window.__DEVORA_LOCALE__ = ${JSON.stringify(locale).replace(/<\/script>/gi, '<\\/script>')};</script>`;
     html = html.replace('</head>', `${localeScript}\n</head>`);
     
     res.type('html').send(html);
@@ -311,7 +311,7 @@ function broadcast(data) {
 // === Sweep Cycle ===
 async function runSweepCycle() {
   if (sweepInProgress) {
-    console.log('[Crucix] Sweep already in progress, skipping');
+    console.log('[Devora] Sweep already in progress, skipping');
     return;
   }
 
@@ -319,7 +319,7 @@ async function runSweepCycle() {
   sweepStartedAt = new Date().toISOString();
   broadcast({ type: 'sweep_start', timestamp: sweepStartedAt });
   console.log(`\n${'='.repeat(60)}`);
-  console.log(`[Crucix] Starting sweep at ${new Date().toLocaleTimeString()}`);
+  console.log(`[Devora] Starting sweep at ${new Date().toLocaleTimeString()}`);
   console.log(`${'='.repeat(60)}`);
 
   try {
@@ -331,7 +331,7 @@ async function runSweepCycle() {
     lastSweepTime = new Date().toISOString();
 
     // 3. Synthesize into dashboard format
-    console.log('[Crucix] Synthesizing dashboard data...');
+    console.log('[Devora] Synthesizing dashboard data...');
     const synthesized = await synthesize(rawData);
 
     // 4. Delta computation + memory
@@ -341,19 +341,19 @@ async function runSweepCycle() {
     // 5. LLM-powered trade ideas (LLM-only feature) — isolated so failures don't kill sweep
     if (llmProvider?.isConfigured) {
       try {
-        console.log('[Crucix] Generating LLM trade ideas...');
+        console.log('[Devora] Generating LLM trade ideas...');
         const previousIdeas = memory.getLastRun()?.ideas || [];
         const llmIdeas = await generateLLMIdeas(llmProvider, synthesized, delta, previousIdeas);
         if (llmIdeas) {
           synthesized.ideas = llmIdeas;
           synthesized.ideasSource = 'llm';
-          console.log(`[Crucix] LLM generated ${llmIdeas.length} ideas`);
+          console.log(`[Devora] LLM generated ${llmIdeas.length} ideas`);
         } else {
           synthesized.ideas = [];
           synthesized.ideasSource = 'llm-failed';
         }
       } catch (llmErr) {
-        console.error('[Crucix] LLM ideas failed (non-fatal):', llmErr.message);
+        console.error('[Devora] LLM ideas failed (non-fatal):', llmErr.message);
         synthesized.ideas = [];
         synthesized.ideasSource = 'llm-failed';
       }
@@ -366,12 +366,12 @@ async function runSweepCycle() {
     if (delta?.summary?.totalChanges > 0) {
       if (telegramAlerter.isConfigured) {
         telegramAlerter.evaluateAndAlert(llmProvider, delta, memory).catch(err => {
-          console.error('[Crucix] Telegram alert error:', err.message);
+          console.error('[Devora] Telegram alert error:', err.message);
         });
       }
       if (discordAlerter.isConfigured) {
         discordAlerter.evaluateAndAlert(llmProvider, delta, memory).catch(err => {
-          console.error('[Crucix] Discord alert error:', err.message);
+          console.error('[Devora] Discord alert error:', err.message);
         });
       }
     }
@@ -384,13 +384,13 @@ async function runSweepCycle() {
     // 6. Push to all connected browsers
     broadcast({ type: 'update', data: currentData });
 
-    console.log(`[Crucix] Sweep complete — ${currentData.meta.sourcesOk}/${currentData.meta.sourcesQueried} sources OK`);
-    console.log(`[Crucix] ${currentData.ideas.length} ideas (${synthesized.ideasSource}) | ${currentData.news.length} news | ${currentData.newsFeed.length} feed items`);
-    if (delta?.summary) console.log(`[Crucix] Delta: ${delta.summary.totalChanges} changes, ${delta.summary.criticalChanges} critical, direction: ${delta.summary.direction}`);
-    console.log(`[Crucix] Next sweep at ${new Date(Date.now() + config.refreshIntervalMinutes * 60000).toLocaleTimeString()}`);
+    console.log(`[Devora] Sweep complete — ${currentData.meta.sourcesOk}/${currentData.meta.sourcesQueried} sources OK`);
+    console.log(`[Devora] ${currentData.ideas.length} ideas (${synthesized.ideasSource}) | ${currentData.news.length} news | ${currentData.newsFeed.length} feed items`);
+    if (delta?.summary) console.log(`[Devora] Delta: ${delta.summary.totalChanges} changes, ${delta.summary.criticalChanges} critical, direction: ${delta.summary.direction}`);
+    console.log(`[Devora] Next sweep at ${new Date(Date.now() + config.refreshIntervalMinutes * 60000).toLocaleTimeString()}`);
 
   } catch (err) {
-    console.error('[Crucix] Sweep failed:', err.message);
+    console.error('[Devora] Sweep failed:', err.message);
     broadcast({ type: 'sweep_error', error: err.message });
   } finally {
     sweepInProgress = false;
@@ -403,7 +403,7 @@ async function start() {
 
   console.log(`
   ╔══════════════════════════════════════════════╗
-  ║           CRUCIX INTELLIGENCE ENGINE         ║
+  ║           DEVORA INTELLIGENCE ENGINE         ║
   ║          Local Palantir · 26 Sources         ║
   ╠══════════════════════════════════════════════╣
   ║  Dashboard:  http://localhost:${port}${' '.repeat(14 - String(port).length)}║
@@ -419,19 +419,19 @@ async function start() {
 
   server.on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
-      console.error(`\n[Crucix] FATAL: Port ${port} is already in use!`);
-      console.error(`[Crucix] A previous Crucix instance may still be running.`);
-      console.error(`[Crucix] Fix:  taskkill /F /IM node.exe   (Windows)`);
-      console.error(`[Crucix]       kill $(lsof -ti:${port})   (macOS/Linux)`);
-      console.error(`[Crucix] Or change PORT in .env\n`);
+      console.error(`\n[Devora] FATAL: Port ${port} is already in use!`);
+      console.error(`[Devora] A previous Devora instance may still be running.`);
+      console.error(`[Devora] Fix:  taskkill /F /IM node.exe   (Windows)`);
+      console.error(`[Devora]       kill $(lsof -ti:${port})   (macOS/Linux)`);
+      console.error(`[Devora] Or change PORT in .env\n`);
     } else {
-      console.error(`[Crucix] Server error:`, err.stack || err.message);
+      console.error(`[Devora] Server error:`, err.stack || err.message);
     }
     process.exit(1);
   });
 
   server.on('listening', async () => {
-    console.log(`[Crucix] Server running on http://localhost:${port}`);
+    console.log(`[Devora] Server running on http://localhost:${port}`);
 
     // Auto-open browser
     // NOTE: On Windows, `start` in PowerShell is an alias for Start-Service, not cmd's start.
@@ -439,7 +439,7 @@ async function start() {
     const openCmd = process.platform === 'win32' ? 'cmd /c start ""' :
                     process.platform === 'darwin' ? 'open' : 'xdg-open';
     exec(`${openCmd} "http://localhost:${port}"`, (err) => {
-      if (err) console.log('[Crucix] Could not auto-open browser:', err.message);
+      if (err) console.log('[Devora] Could not auto-open browser:', err.message);
     });
 
     // Try to load existing data first for instant display (await so dashboard shows immediately)
@@ -447,16 +447,16 @@ async function start() {
       const existing = JSON.parse(readFileSync(join(RUNS_DIR, 'latest.json'), 'utf8'));
       const data = await synthesize(existing);
       currentData = data;
-      console.log('[Crucix] Loaded existing data from runs/latest.json — dashboard ready instantly');
+      console.log('[Devora] Loaded existing data from runs/latest.json — dashboard ready instantly');
       broadcast({ type: 'update', data: currentData });
     } catch {
-      console.log('[Crucix] No existing data found — first sweep required');
+      console.log('[Devora] No existing data found — first sweep required');
     }
 
     // Run first sweep (refreshes data in background)
-    console.log('[Crucix] Running initial sweep...');
+    console.log('[Devora] Running initial sweep...');
     runSweepCycle().catch(err => {
-      console.error('[Crucix] Initial sweep failed:', err.message || err);
+      console.error('[Devora] Initial sweep failed:', err.message || err);
     });
 
     // Schedule recurring sweeps
@@ -466,13 +466,13 @@ async function start() {
 
 // Graceful error handling — log full stack traces for diagnosis
 process.on('unhandledRejection', (err) => {
-  console.error('[Crucix] Unhandled rejection:', err?.stack || err?.message || err);
+  console.error('[Devora] Unhandled rejection:', err?.stack || err?.message || err);
 });
 process.on('uncaughtException', (err) => {
-  console.error('[Crucix] Uncaught exception:', err?.stack || err?.message || err);
+  console.error('[Devora] Uncaught exception:', err?.stack || err?.message || err);
 });
 
 start().catch(err => {
-  console.error('[Crucix] FATAL — Server failed to start:', err?.stack || err?.message || err);
+  console.error('[Devora] FATAL — Server failed to start:', err?.stack || err?.message || err);
   process.exit(1);
 });

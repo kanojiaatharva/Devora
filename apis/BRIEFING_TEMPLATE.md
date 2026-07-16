@@ -1,4 +1,4 @@
-# Crucix Briefing Template
+# Devora Briefing Template
 
 Use this output shape for every intelligence briefing.
 

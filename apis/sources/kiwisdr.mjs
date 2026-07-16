@@ -14,7 +14,7 @@ export async function getAllReceivers() {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 20000);
     const res = await fetch(RECEIVERBOOK_URL, {
-      headers: { 'User-Agent': 'Crucix/1.0' },
+      headers: { 'User-Agent': 'Devora/1.0' },
       signal: controller.signal,
     });
     clearTimeout(timer);

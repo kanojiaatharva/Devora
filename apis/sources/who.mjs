@@ -32,7 +32,7 @@ export async function getOutbreakNews() {
     const timer = setTimeout(() => controller.abort(), 15000);
     const res = await fetch(DON_API, {
       signal: controller.signal,
-      headers: { 'User-Agent': 'Crucix/1.0' },
+      headers: { 'User-Agent': 'Devora/1.0' },
     });
     clearTimeout(timer);
 

@@ -1,4 +1,4 @@
-# Crucix Intelligence Briefing Protocol
+# Devora Intelligence Briefing Protocol
 
 When the user says "brief me", "what's the latest", "what's going on", or asks for a world update, the goal is to answer one question first:
 
@@ -18,10 +18,10 @@ The user wants signal, judgment, and utility.
 
 ## Step 1: Gather Inputs
 
-Run the full Crucix sweep:
+Run the full Devora sweep:
 
 ```bash
-cd C:/Users/ishan/Documents/Crucix && node apis/briefing.mjs 2>&1
+cd /path/to/Devora && node apis/briefing.mjs 2>&1
 ```
 
 Also gather:
@@ -117,7 +117,7 @@ Categories:
 
 ### 4. Pattern Recognition
 
-This is the core of Crucix.
+This is the core of Devora.
 
 Cross-correlate across sources and surface non-obvious patterns such as:
 

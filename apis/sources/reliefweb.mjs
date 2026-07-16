@@ -7,7 +7,7 @@ import { safeFetch } from '../utils/fetch.mjs';
 const BASE = 'https://api.reliefweb.int/v1';
 // Register your own appname at https://apidoc.reliefweb.int/parameters#appname
 // and replace this value. Without an approved appname the API returns 403.
-const APPNAME = process.env.RELIEFWEB_APPNAME || 'crucix';
+const APPNAME = process.env.RELIEFWEB_APPNAME || 'devora';
 
 const HDX_BASE = 'https://data.humdata.org/api/3/action';
 
@@ -21,7 +21,7 @@ async function rwPost(endpoint, body) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'User-Agent': 'Crucix/1.0',
+        'User-Agent': 'Devora/1.0',
       },
       body: JSON.stringify(body),
       signal: controller.signal,

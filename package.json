@@ -1,7 +1,7 @@
 {
-  "name": "crucix",
+  "name": "devora",
   "version": "2.0.0",
-  "description": "Local intelligence engine - 27 OSINT sources, live dashboard, public demo at crucix.live, auto-refresh, optional LLM layer.",
+  "description": "Local intelligence engine - 27 OSINT sources, live dashboard, auto-refresh, optional LLM layer.",
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
@@ -20,7 +20,11 @@
     "dashboard",
     "geopolitical"
   ],
-  "author": "Crucix",
+  "author": "Atharva Kanojia",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/[YOUR_GITHUB_USERNAME]/Devora.git"
+  },
   "license": "AGPL-3.0-only",
   "engines": {
     "node": ">=22",

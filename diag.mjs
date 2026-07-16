@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Crucix Diagnostic — run this to find out why server.mjs fails silently
+// Devora Diagnostic — run this to find out why server.mjs fails silently
 // Usage: node diag.mjs
 
-console.log('=== CRUCIX DIAGNOSTICS ===\n');
+console.log('=== DEVORA DIAGNOSTICS ===\n');
 console.log('Node version:', process.version);
 console.log('Platform:', process.platform, process.arch);
 console.log('CWD:', process.cwd());
@@ -39,7 +39,7 @@ try {
 
 // Step 4: Check each local module
 const modules = [
-  ['./crucix.config.mjs', 'config'],
+  ['./devora.config.mjs', 'config'],
   ['./apis/utils/env.mjs', 'env loader'],
   ['./lib/delta/engine.mjs', 'delta engine'],
   ['./lib/delta/memory.mjs', 'memory manager'],
@@ -75,7 +75,7 @@ try {
 } catch (err) {
   if (err.code === 'EADDRINUSE') {
     console.error(`❌ Port ${port} is already in use!`);
-    console.error('   A previous Crucix instance may still be running.');
+    console.error('   A previous Devora instance may still be running.');
     console.error('   Fix: taskkill /F /IM node.exe   (kills all Node processes)');
     console.error('   Or:  npx kill-port 3117');
   } else {

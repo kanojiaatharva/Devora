@@ -30,7 +30,7 @@ async function getToken() {
       headers: {
         'Authorization': `Basic ${auth}`,
         'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'Crucix/1.0 intelligence-engine',
+        'User-Agent': 'Devora/1.0 intelligence-engine',
       },
       body: 'grant_type=client_credentials',
     });
@@ -51,14 +51,14 @@ export async function getHot(subreddit, opts = {}) {
     return safeFetch(`https://oauth.reddit.com/r/${subreddit}/hot?limit=${limit}&raw_json=1`, {
       headers: {
         'Authorization': `Bearer ${token}`,
-        'User-Agent': 'Crucix/1.0 intelligence-engine',
+        'User-Agent': 'Devora/1.0 intelligence-engine',
       },
     });
   }
 
   // Try public endpoint (may 403)
   return safeFetch(`https://www.reddit.com/r/${subreddit}/hot.json?limit=${limit}&raw_json=1`, {
-    headers: { 'User-Agent': 'Crucix/1.0 intelligence-engine' },
+    headers: { 'User-Agent': 'Devora/1.0 intelligence-engine' },
   });
 }
 
