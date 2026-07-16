@@ -4,11 +4,6 @@
 
 **Your own intelligence terminal. 27 sources. One command. Zero cloud.**
 
-## [Visit The Live Site: devora.live](https://www.devora.live/)
-
-[![Live Website](https://img.shields.io/badge/live-devora.live-00d4ff?style=for-the-badge)](https://www.devora.live/)
-[![Open Demo](https://img.shields.io/badge/open-live%20dashboard-0b1220?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.devora.live/)
-
 [![Node.js 22+](https://img.shields.io/badge/node-22%2B-brightgreen)](#quick-start)
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPLv3-blue.svg)](LICENSE)
 [![Dependencies](https://img.shields.io/badge/dependencies-1%20(express)-orange)](#architecture)
@@ -37,14 +32,9 @@
 
 </div>
 
-> **Live website:** [https://www.devora.live/](https://www.devora.live/)
-> Explore the public demo first, then clone the repo to run Devora locally.
-
 Devora pulls satellite fire detection, flight tracking, radiation monitoring, satellite constellation tracking, economic indicators, live market prices, conflict data, sanctions lists, and social sentiment from 27 open-source intelligence feeds — in parallel, every 15 minutes — and renders everything on a single self-contained Jarvis-style dashboard.
 
 Hook it up to an LLM and it becomes a **two-way intelligence assistant** — pushing multi-tier alerts to Telegram and Discord when something meaningful changes, responding to commands like `/brief` and `/sweep` from your phone, and generating actionable trade ideas grounded in real cross-domain data. Your own analyst that watches the world while you sleep.
-
-Try the live demo first at [https://www.devora.live/](https://www.devora.live/), then clone the repo when you want the full local stack.
 
 No cloud. No telemetry. No subscriptions. Just `node server.mjs` and you're running.
 
@@ -71,7 +61,7 @@ Whether you are a researcher, journalist, trader, OSINT analyst, or simply a cur
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/[YOUR_GITHUB_USERNAME]/Devora.git
+git clone https://github.com/kanojiaatharva/Devora.git
 cd Devora
 
 # 2. Install dependencies (just Express)
@@ -97,7 +87,7 @@ The dashboard opens automatically at `http://localhost:3117` and immediately beg
 ### Docker
 
 ```bash
-git clone https://github.com/[YOUR_GITHUB_USERNAME]/Devora.git
+git clone https://github.com/kanojiaatharva/Devora.git
 cd Devora
 cp .env.example .env    # add your API keys
 docker compose up -d
@@ -513,58 +503,3 @@ Check these in order:
 
 ---
 
-## Screenshots
-
-The `docs/` folder contains dashboard screenshots referenced by this README:
-
-| File | Description |
-|------|-------------|
-| `docs/dashboard.png` | Full dashboard — hero image at the top of this README |
-| `docs/boot.png` | Cinematic boot sequence animation |
-| `docs/map.png` | D3 world map with marker types and flight arcs |
-| `docs/globe.png` | 3D WebGL globe view with atmosphere glow and markers |
-
-To update them: run the dashboard, wait for a sweep to complete, then use your browser's DevTools (`F12` → `Ctrl+Shift+P` → "Capture full size screenshot") or a tool like [LICEcap](https://www.cockos.com/licecap/) for GIFs.
-
----
-
-## Contributing
-
-Found a bug? Want to add a 28th source? PRs welcome. Each source is a standalone module in `apis/sources/` — just export a `briefing()` function that returns structured data and add it to the orchestrator in `apis/briefing.mjs`.
-
-If you find this useful, a star helps others find it too.
-
-For contribution guidelines, review expectations, and source-add rules, see `CONTRIBUTING.md`. For security reports, see `SECURITY.md`.
-
-## Contact
-
-For partnerships, integrations, or other inquiries, please contact:
-- Email: [YOUR_EMAIL_HERE]
-- X/Twitter: [YOUR_X_HANDLE_HERE]
-- Discord: [YOUR_DISCORD_INVITE_HERE]
-
-For bugs and feature requests, please use GitHub Issues so discussion stays visible and actionable.
-
----
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=[YOUR_GITHUB_USERNAME]%2FDevora&type=date&legend=top-left">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=[YOUR_GITHUB_USERNAME]/Devora&type=date&theme=dark&legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=[YOUR_GITHUB_USERNAME]/Devora&type=date&legend=top-left" />
-    <img alt="Star History Chart" src="https://api.star-history.com/image?repos=[YOUR_GITHUB_USERNAME]/Devora&type=date&legend=top-left" />
-  </picture>
- </a>
-
----
-
-## License
-
-AGPL-3.0
-
----
-
-## Attribution
-
-This project is a fork of Crucix (https://github.com/calesthio/Crucix), originally created by calesthio, licensed under AGPL-3.0. Modified and maintained by Atharva Kanojia.
