@@ -2,13 +2,13 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security issue in Crucix, please report it privately instead of opening a public GitHub issue.
+If you discover a security issue in Devora, please report it privately instead of opening a public GitHub issue.
 
-Email: `celesthioailabs@gmail.com`
+Email: `[YOUR_EMAIL_HERE]`
 
 Use a subject line like:
 
-`[Crucix Security] short description`
+`[Devora Security] short description`
 
 Please include:
 

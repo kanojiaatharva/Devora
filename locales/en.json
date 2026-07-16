@@ -5,8 +5,8 @@
     "nativeName": "English"
   },
   "dashboard": {
-    "title": "CRUCIX — Intelligence Terminal",
-    "bootTitle": "CRUCIX INTELLIGENCE ENGINE",
+    "title": "DEVORA — Intelligence Terminal",
+    "bootTitle": "DEVORA INTELLIGENCE ENGINE",
     "bootSubtitle": "Local Palantir · 31 Sources",
     "waitingForSweep": "Waiting for first sweep...",
     "sourcesOk": "Sources OK",
@@ -26,7 +26,7 @@
     "guideBtn": "What Signals Mean"
   },
   "boot": {
-    "initializing": "INITIALIZING CRUCIX ENGINE v2.1.0",
+    "initializing": "INITIALIZING DEVORA ENGINE v2.1.0",
     "connecting": "CONNECTING {count} OSINT SOURCES...",
     "sourceGroup1": "OPENSKY · FIRMS · KIWISDR · MARITIME",
     "sourceGroup2": "FRED · BLS · EIA · TREASURY · GSCPI",
@@ -257,10 +257,10 @@
       "recentAlerts": "📋 Recent Alerts (last {count})",
       "commandsTip": "Tip: Commands are case-insensitive",
       "commandFailed": "❌ Command failed: {error}",
-      "portfolioNotAvailable": "📊 Portfolio integration requires Alpaca MCP connection.\nUse the Crucix dashboard or Claude agent for portfolio queries."
+      "portfolioNotAvailable": "📊 Portfolio integration requires Alpaca MCP connection.\nUse the Devora dashboard or Claude agent for portfolio queries."
     },
     "status": {
-      "title": "🖥️ CRUCIX STATUS",
+      "title": "🖥️ DEVORA STATUS",
       "uptime": "Uptime",
       "lastSweep": "Last sweep",
       "nextSweep": "Next sweep",
@@ -278,7 +278,7 @@
       "never": "never"
     },
     "brief": {
-      "title": "📋 CRUCIX BRIEF",
+      "title": "📋 DEVORA BRIEF",
       "direction": "Direction",
       "changes": "changes",
       "criticalChanges": "critical",

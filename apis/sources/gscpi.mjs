@@ -14,7 +14,7 @@ export async function getGSCPI(months = 12) {
     const timer = setTimeout(() => controller.abort(), 20000);
     const res = await fetch(GSCPI_CSV_URL, {
       signal: controller.signal,
-      headers: { 'User-Agent': 'Crucix/1.0' },
+      headers: { 'User-Agent': 'Devora/1.0' },
     });
     clearTimeout(timer);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

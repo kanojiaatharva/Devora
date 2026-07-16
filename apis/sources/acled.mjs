@@ -129,7 +129,7 @@ async function authenticate() {
 
 // Build headers based on auth method
 function authHeaders(session) {
-  const headers = { 'User-Agent': 'Crucix/1.0', 'Content-Type': 'application/json' };
+  const headers = { 'User-Agent': 'Devora/1.0', 'Content-Type': 'application/json' };
   if (session.method === 'cookie' && session.cookies) {
     headers['Cookie'] = session.cookies;
   } else if (session.method === 'oauth' && session.token) {

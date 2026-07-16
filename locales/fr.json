@@ -5,8 +5,8 @@
     "nativeName": "Français"
   },
   "dashboard": {
-    "title": "CRUCIX — Terminal de Renseignement",
-    "bootTitle": "CRUCIX MOTEUR DE RENSEIGNEMENT",
+    "title": "DEVORA — Terminal de Renseignement",
+    "bootTitle": "DEVORA MOTEUR DE RENSEIGNEMENT",
     "bootSubtitle": "Palantir Local · 31 Sources",
     "waitingForSweep": "En attente du premier scan...",
     "sourcesOk": "Sources OK",
@@ -26,7 +26,7 @@
     "guideBtn": "Signification des Signaux"
   },
   "boot": {
-    "initializing": "INITIALISATION MOTEUR CRUCIX v2.1.0",
+    "initializing": "INITIALISATION MOTEUR DEVORA v2.1.0",
     "connecting": "CONNEXION À {count} SOURCES OSINT...",
     "sourceGroup1": "OPENSKY · FIRMS · KIWISDR · MARITIME",
     "sourceGroup2": "FRED · BLS · EIA · TREASURY · GSCPI",
@@ -257,10 +257,10 @@
       "recentAlerts": "📋 Alertes Récentes (les {count} dernières)",
       "commandsTip": "Astuce : Les commandes ne sont pas sensibles à la casse",
       "commandFailed": "❌ Commande échouée : {error}",
-      "portfolioNotAvailable": "📊 L'intégration portfolio nécessite la connexion Alpaca MCP.\nUtilisez le dashboard Crucix ou l'agent Claude pour les requêtes portfolio."
+      "portfolioNotAvailable": "📊 L'intégration portfolio nécessite la connexion Alpaca MCP.\nUtilisez le dashboard Devora ou l'agent Claude pour les requêtes portfolio."
     },
     "status": {
-      "title": "🖥️ STATUT CRUCIX",
+      "title": "🖥️ STATUT DEVORA",
       "uptime": "Disponibilité",
       "lastSweep": "Dernier scan",
       "nextSweep": "Prochain scan",
@@ -278,7 +278,7 @@
       "never": "jamais"
     },
     "brief": {
-      "title": "📋 BRIEF CRUCIX",
+      "title": "📋 BRIEF DEVORA",
       "direction": "Direction",
       "changes": "changements",
       "criticalChanges": "critiques",

@@ -1,13 +1,13 @@
 <div align="center">
 
-# Crucix
+# Devora
 
 **Your own intelligence terminal. 27 sources. One command. Zero cloud.**
 
-## [Visit The Live Site: crucix.live](https://www.crucix.live/)
+## [Visit The Live Site: devora.live](https://www.devora.live/)
 
-[![Live Website](https://img.shields.io/badge/live-crucix.live-00d4ff?style=for-the-badge)](https://www.crucix.live/)
-[![Open Demo](https://img.shields.io/badge/open-live%20dashboard-0b1220?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.crucix.live/)
+[![Live Website](https://img.shields.io/badge/live-devora.live-00d4ff?style=for-the-badge)](https://www.devora.live/)
+[![Open Demo](https://img.shields.io/badge/open-live%20dashboard-0b1220?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.devora.live/)
 
 [![Node.js 22+](https://img.shields.io/badge/node-22%2B-brightgreen)](#quick-start)
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPLv3-blue.svg)](LICENSE)
@@ -17,10 +17,10 @@
 
 **Enter The Signal Network**
 
-[![Signal Wire](https://img.shields.io/badge/Signal%20Wire-%40crucixmonitor-111111?style=for-the-badge&logo=x&logoColor=white)](https://x.com/crucixmonitor)
-[![Ops Room](https://img.shields.io/badge/Ops%20Room-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/ChVy7SF4)
+[![Signal Wire](https://img.shields.io/badge/Signal%20Wire-%40devoramonitor-111111?style=for-the-badge&logo=x&logoColor=white)](https://x.com/[YOUR_X_HANDLE_HERE])
+[![Ops Room](https://img.shields.io/badge/Ops%20Room-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/[YOUR_DISCORD_INVITE_HERE])
 
-![Crucix Dashboard](docs/dashboard.png)
+![Devora Dashboard](docs/dashboard.png)
 
 <details>
 <summary>More screenshots</summary>
@@ -37,33 +37,33 @@
 
 </div>
 
-> **Live website:** [https://www.crucix.live/](https://www.crucix.live/)
-> Explore the public demo first, then clone the repo to run Crucix locally.
+> **Live website:** [https://www.devora.live/](https://www.devora.live/)
+> Explore the public demo first, then clone the repo to run Devora locally.
 
-Crucix pulls satellite fire detection, flight tracking, radiation monitoring, satellite constellation tracking, economic indicators, live market prices, conflict data, sanctions lists, and social sentiment from 27 open-source intelligence feeds — in parallel, every 15 minutes — and renders everything on a single self-contained Jarvis-style dashboard.
+Devora pulls satellite fire detection, flight tracking, radiation monitoring, satellite constellation tracking, economic indicators, live market prices, conflict data, sanctions lists, and social sentiment from 27 open-source intelligence feeds — in parallel, every 15 minutes — and renders everything on a single self-contained Jarvis-style dashboard.
 
 Hook it up to an LLM and it becomes a **two-way intelligence assistant** — pushing multi-tier alerts to Telegram and Discord when something meaningful changes, responding to commands like `/brief` and `/sweep` from your phone, and generating actionable trade ideas grounded in real cross-domain data. Your own analyst that watches the world while you sleep.
 
-Try the live demo first at [https://www.crucix.live/](https://www.crucix.live/), then clone the repo when you want the full local stack.
+Try the live demo first at [https://www.devora.live/](https://www.devora.live/), then clone the repo when you want the full local stack.
 
 No cloud. No telemetry. No subscriptions. Just `node server.mjs` and you're running.
 
 ## Token / Asset Warning
 
 > [!WARNING]
-> **Crucix has not launched any official token, coin, NFT, airdrop, presale, or other blockchain-based asset.**
-> Any token or digital asset using the Crucix name, logo, or branding is not affiliated with or endorsed by Crucix.
+> **Devora has not launched any official token, coin, NFT, airdrop, presale, or other blockchain-based asset.**
+> Any token or digital asset using the Devora name, logo, or branding is not affiliated with or endorsed by Devora.
 > Do not buy it, promote it, connect a wallet to claim it, sign transactions, or send funds based on third-party posts, DMs, or websites.
 
 ---
 
 ## Why This Exists
 
-Most of the world's real-time intelligence — satellite imagery, radiation levels, conflict events, economic indicators, flight tracking, maritime activity — is publicly available. It's just scattered across dozens of government APIs, research institutions, and open data feeds that nobody has time to check individually.
+I believe that the world's real-time intelligence — satellite imagery, radiation levels, conflict events, economic indicators, flight tracking, maritime activity — should not be locked behind corporate paywalls or accessible only to those with institutional budgets. It is publicly available, but scattered across dozens of government APIs, research institutions, and open data feeds that nobody has time to monitor individually.
 
-Crucix brings it all into one place. Not behind a paywall, not locked in an enterprise platform, not requiring a security clearance. Just open data, aggregated and cross-correlated on your own machine, updated every 15 minutes.
+I built Devora to solve this. It brings all of these critical signals into a single, cohesive, self-contained dashboard. No cloud middleware, no hidden telemetry, no monthly subscriptions. Just pure open data, aggregated and cross-correlated on your own machine, updated every 15 minutes. 
 
-It was built for anyone who wants to understand what's actually happening in the world right now — researchers, journalists, traders, OSINT analysts, or just curious people who believe access to information shouldn't depend on your budget.
+Whether you are a researcher, journalist, trader, OSINT analyst, or simply a curious individual who wants to cut through the noise and see what is actually happening in the world, Devora is designed to put that power back in your hands.
 
 ---
 
@@ -71,8 +71,8 @@ It was built for anyone who wants to understand what's actually happening in the
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/calesthio/Crucix.git
-cd Crucix
+git clone https://github.com/[YOUR_GITHUB_USERNAME]/Devora.git
+cd Devora
 
 # 2. Install dependencies (just Express)
 npm install
@@ -97,8 +97,8 @@ The dashboard opens automatically at `http://localhost:3117` and immediately beg
 ### Docker
 
 ```bash
-git clone https://github.com/calesthio/Crucix.git
-cd Crucix
+git clone https://github.com/[YOUR_GITHUB_USERNAME]/Devora.git
+cd Devora
 cp .env.example .env    # add your API keys
 docker compose up -d
 ```
@@ -151,7 +151,7 @@ The server runs a sweep cycle every 15 minutes (configurable). Each cycle:
 6. Pushes update to all connected browsers via SSE
 
 ### Telegram Bot (Two-Way)
-Crucix doubles as an interactive Telegram bot. Beyond sending alerts, it responds to commands directly from your chat:
+Devora doubles as an interactive Telegram bot. Beyond sending alerts, it responds to commands directly from your chat:
 
 | Command | What It Does |
 |---------|-------------|
@@ -168,7 +168,7 @@ This requires `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in `.env`. The bot pol
 
 ### Discord Bot (Two-Way)
 
-Crucix also supports Discord as a full-featured bot with slash commands and rich embed alerts. It mirrors the Telegram bot's capabilities with Discord-native formatting.
+Devora also supports Discord as a full-featured bot with slash commands and rich embed alerts. It mirrors the Telegram bot's capabilities with Discord-native formatting.
 
 | Command | What It Does |
 |---------|-------------|
@@ -183,7 +183,7 @@ Alerts are delivered as rich embeds with color-coded sidebars: red for FLASH, ye
 
 **Webhook fallback:** If you don't want to run a full bot, set `DISCORD_WEBHOOK_URL` instead. This enables one-way alerts (no slash commands) with zero dependencies — no `discord.js` needed.
 
-**Optional dependency:** The full bot requires `discord.js`. Install it with `npm install discord.js`. If it's not installed, Crucix automatically falls back to webhook-only mode.
+**Optional dependency:** The full bot requires `discord.js`. Install it with `npm install discord.js`. If it's not installed, Devora automatically falls back to webhook-only mode.
 
 ### Optional LLM Layer
 Connect any of 8 LLM providers for enhanced analysis:
@@ -267,17 +267,17 @@ Alerts work with or without an LLM on both Telegram and Discord. With an LLM con
 
 ### Without Any Keys
 
-Crucix still works with zero API keys. 18+ sources require no authentication at all. Sources that need keys return structured errors and the rest of the sweep continues normally.
+Devora still works with zero API keys. 18+ sources require no authentication at all. Sources that need keys return structured errors and the rest of the sweep continues normally.
 
 ---
 
 ## Architecture
 
 ```
-crucix/
+devora/
 ├── server.mjs                 # Express dev server (SSE, auto-refresh, LLM, bot commands)
-├── crucix.config.mjs          # Configuration with env var overrides + delta thresholds
-├── diag.mjs                   # Diagnostic script — run if server fails to start
+├── devora.config.mjs          # Configuration with env var overrides + delta thresholds
+├── diag.mjs                   # Diagnostic script — run if server.mjs fails to start
 ├── .env.example               # All documented env vars
 ├── package.json               # Runtime: express | Optional: discord.js
 ├── docs/                      # Screenshots for README
@@ -426,7 +426,7 @@ All settings are in `.env` with sensible defaults:
 | `DISCORD_GUILD_ID` | — | Server ID (instant slash command registration) |
 | `DISCORD_WEBHOOK_URL` | — | Webhook URL (alert-only fallback, no bot needed) |
 
-Delta engine thresholds (how sensitive the system is to changes between sweeps) can be customized in `crucix.config.mjs` under the `delta.thresholds` section. The defaults are tuned to filter out noise while catching meaningful moves.
+Delta engine thresholds (how sensitive the system is to changes between sweeps) can be customized in `devora.config.mjs` under the `delta.thresholds` section. The defaults are tuned to filter out noise while catching meaningful moves.
 
 ---
 
@@ -463,7 +463,7 @@ This tests every import one by one, checks your Node.js version, and verifies po
 
 **3. Check if port 3117 is already in use:**
 
-A previous Crucix instance may still be running in the background.
+A previous Devora instance may still be running in the background.
 
 ```powershell
 # Windows PowerShell
@@ -485,7 +485,7 @@ Then try starting again. You can also change the port by setting `PORT=3118` in 
 ```bash
 node --version
 ```
-Crucix requires Node.js 22 or later. If you have an older version, download the latest LTS from [nodejs.org](https://nodejs.org/).
+Devora requires Node.js 22 or later. If you have an older version, download the latest LTS from [nodejs.org](https://nodejs.org/).
 
 ### Dashboard shows empty panels after first start
 
@@ -495,11 +495,11 @@ This is normal — the first sweep takes 30–60 seconds to query all 27 sources
 
 Expected behavior. Sources that require API keys will return structured errors if the key isn't set. The rest of the sweep continues normally. Check the Source Integrity section in the dashboard (or the server logs) to see which sources failed and why. The 3 most impactful free keys to add are `FRED_API_KEY`, `FIRMS_MAP_KEY`, and `EIA_API_KEY`.
 
-OpenSky can also return `HTTP 429` when its public hotspots are queried too aggressively. Crucix does not try to evade that limit. Instead, it surfaces the throttle/error in source health and preserves the most recent non-empty air traffic snapshot from `runs/` so the dashboard flight layer does not suddenly go blank on a throttled sweep.
+OpenSky can also return `HTTP 429` when its public hotspots are queried too aggressively. Devora does not try to evade that limit. Instead, it surfaces the throttle/error in source health and preserves the most recent non-empty air traffic snapshot from `runs/` so the dashboard flight layer does not suddenly go blank on a throttled sweep.
 
 ### Telegram bot not responding to commands
 
-Make sure both `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` are set in `.env`. The bot only responds to messages from the configured chat ID (security measure). You should see `[Crucix] Telegram alerts enabled` and `[Crucix] Bot command polling started` in the server logs on startup. If not, double-check your token with `curl https://api.telegram.org/bot<YOUR_TOKEN>/getMe`.
+Make sure both `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` are set in `.env`. The bot only responds to messages from the configured chat ID (security measure). You should see `[Devora] Telegram alerts enabled` and `[Devora] Bot command polling started` in the server logs on startup. If not, double-check your token with `curl https://api.telegram.org/bot<YOUR_TOKEN>/getMe`.
 
 ### Discord bot not responding to slash commands
 
@@ -538,7 +538,10 @@ For contribution guidelines, review expectations, and source-add rules, see `CON
 
 ## Contact
 
-For partnerships, integrations, or other non-issue inquiries, you can reach me at `celesthioailabs@gmail.com`.
+For partnerships, integrations, or other inquiries, please contact:
+- Email: [YOUR_EMAIL_HERE]
+- X/Twitter: [YOUR_X_HANDLE_HERE]
+- Discord: [YOUR_DISCORD_INVITE_HERE]
 
 For bugs and feature requests, please use GitHub Issues so discussion stays visible and actionable.
 
@@ -546,16 +549,22 @@ For bugs and feature requests, please use GitHub Issues so discussion stays visi
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=calesthio%2FCrucix&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=[YOUR_GITHUB_USERNAME]%2FDevora&type=date&legend=top-left">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=calesthio/Crucix&type=date&theme=dark&legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=calesthio/Crucix&type=date&legend=top-left" />
-    <img alt="Star History Chart" src="https://api.star-history.com/image?repos=calesthio/Crucix&type=date&legend=top-left" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=[YOUR_GITHUB_USERNAME]/Devora&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=[YOUR_GITHUB_USERNAME]/Devora&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/image?repos=[YOUR_GITHUB_USERNAME]/Devora&type=date&legend=top-left" />
   </picture>
-</a>
+ </a>
 
 ---
 
 ## License
 
 AGPL-3.0
+
+---
+
+## Attribution
+
+This project is a fork of Crucix (https://github.com/calesthio/Crucix), originally created by calesthio, licensed under AGPL-3.0. Modified and maintained by Atharva Kanojia.

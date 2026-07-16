@@ -37,7 +37,7 @@ async function fetchFires(opts = {}) {
   try {
     const res = await fetch(url, {
       signal: controller.signal,
-      headers: { 'User-Agent': 'Crucix/1.0' },
+      headers: { 'User-Agent': 'Devora/1.0' },
     });
     clearTimeout(timer);
     if (!res.ok) return { error: `HTTP ${res.status}` };

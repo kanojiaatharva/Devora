@@ -32,8 +32,8 @@ test('OpenRouterProvider Unit Tests', async (t) => {
     global.fetch = async (url, options) => {
       assert.equal(url, 'https://openrouter.ai/api/v1/chat/completions');
       assert.equal(options.headers['Authorization'], 'Bearer test-key');
-      assert.equal(options.headers['X-Title'], 'Crucix');
-      assert.equal(options.headers['HTTP-Referer'], 'https://github.com/calesthio/Crucix');
+      assert.equal(options.headers['X-Title'], 'Devora');
+      assert.equal(options.headers['HTTP-Referer'], 'https://github.com/[YOUR_GITHUB_USERNAME]/Devora');
 
       const body = JSON.parse(options.body);
       assert.equal(body.model, 'test-model');
