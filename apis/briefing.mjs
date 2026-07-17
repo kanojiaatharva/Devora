@@ -66,7 +66,7 @@ export async function runSource(name, fn, ...args) {
   }
 }
 
-async function runBatches(tasks, batchSize = 4) {
+async function runBatches(tasks, batchSize = 2) {
   const results = [];
   for (let i = 0; i < tasks.length; i += batchSize) {
     const batch = tasks.slice(i, i + batchSize);
@@ -74,6 +74,8 @@ async function runBatches(tasks, batchSize = 4) {
     const batchPromises = batch.map(t => runSource(t.name, t.fn, ...(t.args || [])));
     const batchResults = await Promise.all(batchPromises);
     results.push(...batchResults);
+    // Small pause between batches — lets Node GC reclaim memory on low-RAM hosts (e.g. Render free tier)
+    if (i + batchSize < tasks.length) await new Promise(r => setTimeout(r, 150));
   }
   return results;
 }
@@ -125,8 +127,8 @@ export async function fullBriefing() {
     { name: 'Cloudflare-Radar', fn: cloudflareRadar },
   ];
 
-  // Run in batches of 4 to stay well under Render's 512MB RAM limit
-  const sources = await runBatches(tasks, 4);
+  // Run in batches of 2 to stay well under Render's 512MB RAM limit
+  const sources = await runBatches(tasks, 2);
   const totalMs = Date.now() - start;
 
   const output = {

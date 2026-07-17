@@ -7,7 +7,7 @@ services:
     branch: main
 
     buildCommand: npm install --production
-    startCommand: node server.mjs
+    startCommand: npm start
 
     envVars:
       - key: NODE_VERSION

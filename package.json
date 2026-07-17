@@ -4,8 +4,8 @@
   "description": "Local intelligence engine - 27 OSINT sources, live dashboard, auto-refresh, optional LLM layer.",
   "type": "module",
   "scripts": {
-    "start": "node server.mjs",
-    "dev": "node --trace-warnings server.mjs",
+    "start": "node --max-old-space-size=400 server.mjs",
+    "dev": "node --max-old-space-size=400 --trace-warnings server.mjs",
     "sweep": "node apis/briefing.mjs",
     "inject": "node dashboard/inject.mjs",
     "brief": "node apis/briefing.mjs",
