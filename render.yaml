@@ -1,0 +1,64 @@
+services:
+  - type: web
+    name: devora
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+
+    buildCommand: npm install --production
+    startCommand: node server.mjs
+
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+
+      - key: REFRESH_INTERVAL_MINUTES
+        value: 15
+
+      - key: FRED_API_KEY
+        value: ""
+
+      - key: FIRMS_MAP_KEY
+        value: ""
+
+      - key: EIA_API_KEY
+        value: ""
+
+      - key: AISSTREAM_API_KEY
+        value: ""
+
+      - key: ACLED_EMAIL
+        value: ""
+
+      - key: ACLED_PASSWORD
+        value: ""
+
+      - key: CLOUDFLARE_API_TOKEN
+        value: ""
+
+      - key: LLM_PROVIDER
+        value: ""
+
+      - key: LLM_API_KEY
+        value: ""
+
+      - key: LLM_MODEL
+        value: ""
+
+      - key: TELEGRAM_BOT_TOKEN
+        value: ""
+
+      - key: TELEGRAM_CHAT_ID
+        value: ""
+
+      - key: DISCORD_BOT_TOKEN
+        value: ""
+
+      - key: DISCORD_CHANNEL_ID
+        value: ""
+
+      - key: DISCORD_WEBHOOK_URL
+        value: ""
+
+    healthCheckPath: /api/health
